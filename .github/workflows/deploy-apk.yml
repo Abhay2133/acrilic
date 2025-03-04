@@ -31,7 +31,7 @@ jobs:
       - name: Prepare Deployment Directory
         run: |
           mkdir -p build/web/downloads
-          cp build/app/outputs/flutter-apk/app-release.apk build/web/Arcillic.apk
+          cp build/app/outputs/flutter-apk/app-release.apk build/web/Acrillic.apk
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
