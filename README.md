@@ -1,5 +1,5 @@
-# acrillic
+# acrilic
 
-web preview: [link](https://abhay2133.github.io/acrillic)
+web preview: [link](https://abhay2133.github.io/acrilic)
 
-apk download: [link](https://abhay2133.github.io/acrillic/Acrillic.apk)
+apk download: [link](https://abhay2133.github.io/acrillic/Acrilic.apk)
