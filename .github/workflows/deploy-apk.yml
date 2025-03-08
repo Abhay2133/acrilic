@@ -23,7 +23,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Flutter Web App
-        run: flutter build web --release --base-href "/acrilic/"
+        run: flutter build web --release --base-href "/acrilc/"
 
       - name: Build APK
         run: flutter build apk --release
@@ -31,7 +31,7 @@ jobs:
       - name: Prepare Deployment Directory
         run: |
           mkdir -p build/web/downloads
-          cp build/app/outputs/flutter-apk/app-release.apk build/web/Acrilic.apk
+          cp build/app/outputs/flutter-apk/app-release.apk build/web/Acrilc.apk
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

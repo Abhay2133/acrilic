@@ -23,7 +23,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Flutter Web App
-        run: flutter build web --release --base-href "/acrilic/"
+        run: flutter build web --release --base-href "/acrilc/"
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

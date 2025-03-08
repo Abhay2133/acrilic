@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^14.8.1
+  rename_app: ^1.6.2
 
 dev_dependencies:
   flutter_test:
