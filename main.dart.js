@@ -34945,7 +34945,7 @@ $1(a){this.a.aK().$0()
 this.b.fg()},
 $S:13}
 A.Fz.prototype={
-P(a){return new A.pE($.aoH(),"Acrillic",!1,null)}}
+P(a){return new A.pE($.aoH(),"Acrilc",!1,null)}}
 A.py.prototype={
 P(a){return A.a3a(A.afi(B.NF),B.yP)}}
 A.pN.prototype={
