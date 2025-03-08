@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Acrillic',
+      title: 'Acrilc',
       routerConfig: AppRouter.router, // Using GoRouter setup from app_router.dart
     );
   }
