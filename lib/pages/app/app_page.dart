@@ -14,13 +14,31 @@ class AppPage extends StatefulWidget {
 class AppPageState extends State<AppPage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = [
-    HomeScreen(),
-    const Center(child: Text('Discover Screen')),
-    const Center(child: Text('New Screen')),
-    const Center(child: Text('Inbox Screen')),
-    const Center(child: Text('Profile Screen')),
-  ];
+  final List<Widget> _screens = [wip(), wip(), wip(), wip(), wip()];
+
+  static wip() {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      // color: Colors.red,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/images/wip.png',
+            width: 200,
+            height: 200,
+            fit: BoxFit.cover,
+          ),
+          SizedBox(height: 20),
+          Text("Work in Progress"),
+        ],
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -44,7 +62,8 @@ class AppPageState extends State<AppPage> {
             icon: Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationY(pi),
-              child: const Icon(Icons.sort)),
+              child: const Icon(Icons.sort),
+            ),
             onPressed: () {
               // Add drawer action or menu logic
             },
@@ -56,8 +75,6 @@ class AppPageState extends State<AppPage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Discover'),
