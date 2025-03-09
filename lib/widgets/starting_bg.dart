@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:acrillic/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class StartingBG extends StatelessWidget {
@@ -8,44 +9,63 @@ class StartingBG extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  return Stack(
+    return Stack(
       fit: StackFit.expand,
       children: [
-        // Background Image with Fixed Position and Rotation
+        Container(
+          height: double.infinity,
+          width: double.infinity,
+          color: AppColor.primaryBackground,
+        ),
+        // top-left - Shape
         Positioned(
-          left: -350, // Adjust position as needed
-          top: -400, // Adjust position as needed
+          left: -200, // Adjust position as needed
+          top: -150, // Adjust position as needed
           child: Transform.rotate(
-            angle: 0, // Rotate 30 degrees (convert degrees to radians)
+            angle: 0,
             child: Image.asset(
-              'assets/images/bg-1.png',
-              width: 500, // Set width
-              // height: 200, // Set height
+              'assets/images/shape.png',
+              width: 300, // Set width
               fit: BoxFit.cover, // Adjust fit as needed
             ),
           ),
         ),
+        // bottom-right - Shape
         Positioned(
-          left: -250, // Adjust position as needed
-          bottom: 50, // Adjust position as needed
+          right: -100, // Adjust position as needed
+          bottom: 80, // Adjust position as needed
+          child: Transform.rotate(
+            angle: 0,
+            child: Image.asset(
+              'assets/images/shape.png',
+              width: 320, // Set width
+              fit: BoxFit.cover, // Adjust fit as needed
+            ),
+          ),
+        ),
+        // bottom-left
+        Positioned(
+          left: -0, // Adjust position as needed
+          bottom: 0, // Adjust position as needed
           child: Transform.rotate(
             angle: 0, // Rotate 30 degrees (convert degrees to radians)
             child: Image.asset(
-              'assets/images/bg-2.png',
+              'assets/images/bg-bottom-left.png',
               width: 300, // Set width
               // height: 200, // Set height
               fit: BoxFit.cover, // Adjust fit as needed
             ),
           ),
         ),
+        // Top - Right
         Positioned(
-          right: -400, // Adjust position as needed
-          bottom: -350, // Adjust position as needed
+          right: 0, // Adjust position as needed
+          top: 0, // Adjust position as needed
           child: Transform.rotate(
             angle: 0, // Rotate 30 degrees (convert degrees to radians)
             child: Image.asset(
-              'assets/images/bg-3.png',
-              width: 500, // Set width
+              'assets/images/bg-top-right.png',
+              width: 300, // Set width
               // height: 200, // Set height
               fit: BoxFit.cover, // Adjust fit as needed
             ),

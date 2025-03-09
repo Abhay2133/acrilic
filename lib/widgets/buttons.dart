@@ -1,14 +1,17 @@
+import 'package:acrillic/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
   final Widget child;
   final double width;
   final VoidCallback? onPressed;
+  final bool? disabled;
   const Button({
     super.key,
     required this.child,
     this.width = 120,
     this.onPressed,
+    this.disabled = false
   });
 
   @override
@@ -21,7 +24,8 @@ class Button extends StatelessWidget {
           onPressed?.call();
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFFED9999), // Set color
+          elevation: 4,
+          backgroundColor: AppColor.primaryButton, // Set color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50), // Rounded corners
           ),
@@ -31,3 +35,4 @@ class Button extends StatelessWidget {
     );
   }
 }
+

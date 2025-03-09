@@ -1,0 +1,71 @@
+import 'dart:math';
+
+import 'package:acrillic/pages/app/home_screen.dart';
+import 'package:flutter/material.dart';
+
+class AppPage extends StatefulWidget {
+  final int selectedIndex;
+  const AppPage(this.selectedIndex, {super.key});
+
+  @override
+  AppPageState createState() => AppPageState();
+}
+
+class AppPageState extends State<AppPage> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _screens = [
+    HomeScreen(),
+    const Center(child: Text('Discover Screen')),
+    const Center(child: Text('New Screen')),
+    const Center(child: Text('Inbox Screen')),
+    const Center(child: Text('Profile Screen')),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.selectedIndex;
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(child: const Text('acrilc')),
+        actions: [
+          IconButton(
+            icon: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.rotationY(pi),
+              child: const Icon(Icons.sort)),
+            onPressed: () {
+              // Add drawer action or menu logic
+            },
+          ),
+        ],
+      ),
+      body: IndexedStack(index: _selectedIndex, children: _screens),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.explore), label: 'Discover'),
+          BottomNavigationBarItem(icon: Icon(Icons.add_circle), label: 'New'),
+          BottomNavigationBarItem(icon: Icon(Icons.mail), label: 'Inbox'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+      ),
+    );
+  }
+}

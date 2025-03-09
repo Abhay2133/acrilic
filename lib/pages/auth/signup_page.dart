@@ -9,29 +9,30 @@ import 'package:acrillic/widgets/starting_bg.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _uuidController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isLoading = false;
 
-  Future<void> _login() async {
+  Future<void> _signup() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         isLoading = true;
       });
       final String apiUrl =
-          "${ENV.baseUrl}/auth/login"; // Replace with actual hostname
+          "${ENV.baseUrl}/auth/signup"; // Replace with actual hostname
       final Map<String, String> requestBody = {
+        "fullName": _nameController.text.trim(),
         "email": _uuidController.text.trim(),
         "password": _passwordController.text.trim(),
       };
@@ -44,17 +45,15 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         final responseData = tryEncodeJson(response.body);
-        if (response.statusCode == 200) {
-          // Store token in SharedPreferences
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString("jwt_token", responseData['token']);
+        if (response.statusCode == 201) {
+          // Handle successful login
           if (mounted) context.go("/app/home");
-
           // You can navigate to another screen here
         } else {
           // Handle login error
+          print("Login Failed: ${response.body}");
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Login Failed: ${responseData["msg"]}")),
+            SnackBar(content: Text("Signup Failed: ${responseData["msg"]}")),
           );
         }
       } catch (e) {
@@ -102,6 +101,9 @@ class _LoginPageState extends State<LoginPage> {
               key: _formKey,
               child: Column(
                 children: [
+                  // Full Name
+                  formField("Full Name", _nameController, false),
+                  SizedBox(height: 10),
                   // UUID INPUT
                   formField("Email or Phone", _uuidController, false),
                   SizedBox(height: 10),
@@ -110,34 +112,36 @@ class _LoginPageState extends State<LoginPage> {
 
                   // Submit Button
                   SizedBox(height: 20),
-                  SizedBox(
-                    width: 280,
-                    child: Button(
-                      disabled: isLoading,
-                      onPressed: () {
-                        _login();
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text("Login", style: TextStyle(color: Colors.white)),
-                          isLoading
-                              ? Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10.0,
-                                ),
-                                child: loader(size: 16),
-                              )
-                              : SizedBox(),
-                        ],
-                      ),
-                    ),
-                  ),
+                  submit(),
                 ],
               ),
             ),
             SizedBox(height: 50),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget submit() {
+    return SizedBox(
+      width: 280,
+      child: Button(
+        disabled: isLoading,
+        onPressed: () {
+          _signup();
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Text("Signup", style: TextStyle(color: Colors.white)),
+            isLoading
+                ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: loader(size: 16),
+                )
+                : SizedBox(),
           ],
         ),
       ),
@@ -169,12 +173,6 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           formLabel(label),
           InputField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'This field is required';
-              }
-              return null;
-            },
             controller: controller,
             hintText: '',
             isPassword: isPassword,
